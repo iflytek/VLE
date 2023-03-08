@@ -19,6 +19,8 @@ from typing import Optional, Tuple, Union
 
 import torch
 from torch import nn
+import torch.nn.functional as F
+from torch.nn.utils.rnn import pad_sequence
 
 from transformers.modeling_utils import PreTrainedModel
 from transformers.utils import add_start_docstrings, add_start_docstrings_to_model_forward, logging, replace_return_docstrings, ModelOutput
@@ -68,6 +70,18 @@ class VLEForVQAOutput(ModelOutput):
     loss : torch.FloatTensor = None
     logits: torch.FloatTensor = None
 
+@dataclass
+class VLEForVCRQ2AOutput(ModelOutput):
+
+    loss : torch.FloatTensor = None
+    logits: torch.FloatTensor = None
+
+@dataclass
+class VLEForVCRQA2ROutput(ModelOutput):
+
+    loss : torch.FloatTensor = None
+    logits: torch.FloatTensor = None
+
 class ITMHead(nn.Module):
     def __init__(self, hidden_size):
         super().__init__()
@@ -94,9 +108,9 @@ def extend_position_embedding(state_dict, patch_size, after):
     pe_weight = keys['pe'][1]
     position_length_before = pe_weight.shape[0]
     embed_dim = pe_weight.shape[1]
-    grid_before = position_length_before - 1
+    grid_before = int((position_length_before - 1)**(1/2))
     position_length_after = (after // patch_size) ** 2 + 1 
-    grid_after = position_length_after - 1
+    grid_after = int((position_length_after - 1)**(1/2))
 
     new_pe_weight = pe_weight[1:].reshape((grid_before,grid_before,-1))
     new_pe_weight =  torch.nn.functional.interpolate(
@@ -285,6 +299,7 @@ class VLEModel(VLEPreTrainedModel):
         position_ids: Optional[torch.LongTensor] = None,
         token_type_ids: Optional[torch.LongTensor] = None,
         patch_ids = None,
+        extend_token_type_ids = None,
         return_loss: Optional[bool] = None,
         return_dict: Optional[bool] = None,
     ) -> Union[Tuple[torch.Tensor], VLEModelOutput]:
@@ -311,14 +326,40 @@ class VLEModel(VLEPreTrainedModel):
         text_embeds = self.text_projection_layer(text_embeds)
 
         if patch_ids is not None:
-            raise NotImplementedError
+            # add box image embeddings (mean)
+            # image_embeds : batch_size * (num_patch+1) * dims
+            image_embeds_size_1 = image_embeds.size(1)
+            new_image_embeds = []
+            for item_image_embeds, item_patch_ids  in zip(image_embeds, patch_ids):
+                add_item_image_embeds = []
+                for i_, box_patch_ids in enumerate(item_patch_ids):
+                    # skip cls embedding
+                    box_image_embeds = item_image_embeds[torch.as_tensor(box_patch_ids) + 1]
+                    box_image_embeds = torch.mean(box_image_embeds, dim=0, keepdim=True)
+                    add_item_image_embeds.append(box_image_embeds)
+                new_image_embeds.append(torch.cat([item_image_embeds] + add_item_image_embeds))
+            image_embeds = pad_sequence(new_image_embeds, batch_first=True)
 
-        image_masks = torch.ones((image_embeds.size(0), image_embeds.size(1)), dtype=torch.long, device=image_embeds.device)
+            len_of_ones = torch.as_tensor([len(box_p_ids) for box_p_ids in patch_ids], dtype=torch.int64, device=image_embeds.device) + image_embeds_size_1
+            image_mask_ones = [torch.ones(l, dtype=torch.long, device=image_embeds.device) for l in len_of_ones]
+            image_mask_zeros = [torch.zeros(image_embeds.size(1) - l, dtype=torch.long, device=image_embeds.device) for l in len_of_ones]
+            image_masks = torch.cat([torch.cat([one, zero]).unsqueeze(0) for one, zero in zip(image_mask_ones, image_mask_zeros)], dim=0)
+
+            text_token_type_ids = pad_sequence(list(map(lambda x: torch.as_tensor(x, device=image_embeds.device, dtype=torch.long),extend_token_type_ids[1])),batch_first=True)
+            text_token_type_ids = torch.cat([text_token_type_ids, torch.zeros(text_embeds.size(0), text_embeds.size(1) - text_token_type_ids.size(1), device=image_embeds.device, dtype=torch.long)], dim=1)
+            image_added_token_type_ids = pad_sequence(list(map(lambda x: torch.as_tensor(x, device=image_embeds.device, dtype=torch.long),extend_token_type_ids[0])),batch_first=True)
+            image_token_type_ids = torch.cat([torch.ones(image_embeds.size(0), image_embeds_size_1, dtype=torch.long, device=image_embeds.device), image_added_token_type_ids], dim=1)
+        else:
+            image_masks = torch.ones((image_embeds.size(0), image_embeds.size(1)), dtype=torch.long, device=image_embeds.device)
         extend_image_masks = self.text_model.get_extended_attention_mask(image_masks, image_masks.size())
-        image_embeds = image_embeds + self.token_type_embeddings(torch.full_like(image_masks, 1)) # image_token_type_idx=1
-
         extend_text_masks = self.text_model.get_extended_attention_mask(attention_mask, attention_mask.size())
-        text_embeds = text_embeds  + self.token_type_embeddings(torch.zeros_like(attention_mask))
+        
+        if patch_ids is not None and extend_token_type_ids is not None:
+            text_embeds = text_embeds + self.token_type_embeddings(text_token_type_ids)
+            image_embeds = image_embeds + self.token_type_embeddings(image_token_type_ids)
+        else:
+            image_embeds = image_embeds + self.token_type_embeddings(torch.full_like(image_masks, 1))
+            text_embeds = text_embeds  + self.token_type_embeddings(torch.zeros_like(attention_mask))
 
         x, y = text_embeds, image_embeds
         for text_layer, image_layer in zip(self.cross_modal_text_layers, self.cross_modal_image_layers):
@@ -706,3 +747,133 @@ class VLEForMLM(VLEPreTrainedModel):
 
     def set_output_embeddings(self, new_embeddings):
         self.mlm_score[1].predictions.decoder = new_embeddings
+
+        
+class VLEForVCRQ2A(VLEPreTrainedModel):
+    def __init__(
+        self,
+        config: Optional[VLEConfig] = None,
+        vision_model: Optional[PreTrainedModel] = None,
+        text_model: Optional[PreTrainedModel] = None,
+    ):
+        super().__init__(config)
+        self.vle = VLEModel(config, vision_model, text_model)
+
+        hidden_size = config.hidden_size
+        self.vcr_q2a_logit = nn.Sequential(
+                                    nn.Linear(hidden_size * 2, hidden_size * 2),
+                                    nn.LayerNorm(hidden_size * 2),
+                                    nn.GELU(),
+                                    nn.Linear(hidden_size * 2, 1),
+        )
+        self.vcr_q2a_logit.apply(self._init_weights)
+    
+    def forward(self,
+                input_ids: Optional[torch.LongTensor],
+                pixel_values: Optional[torch.FloatTensor],
+                attention_mask: Optional[torch.Tensor] = None,
+                position_ids: Optional[torch.LongTensor] = None,
+                token_type_ids: Optional[torch.LongTensor] = None,
+                patch_ids = None,
+                vcr_labels = None,
+                extend_token_type_ids = None,
+                return_loss: Optional[bool] = None,
+                return_dict: Optional[bool] = None,
+    ) -> Union[Tuple[torch.Tensor], VLEForVQAOutput]:
+
+        return_dict = return_dict if return_dict is not None else self.config.return_dict
+
+        infers = []
+        for i in range(4):
+            vle_output = self.vle(
+                input_ids = input_ids[i],
+                pixel_values = pixel_values,
+                attention_mask = attention_mask[i],
+                position_ids = position_ids,
+                token_type_ids = token_type_ids[i],
+                patch_ids = patch_ids[i],
+                extend_token_type_ids = extend_token_type_ids[i])
+            pooler_output = vle_output[0]
+            logits = self.vcr_q2a_logit(pooler_output)
+            infers.append(logits)
+
+        vcr_logits = torch.cat(infers, dim=-1)
+        vcr_loss = None
+        if return_loss and vcr_labels is not None:
+            vcr_targets = torch.zeros(len(vcr_logits), dtype=torch.long).to(self.device)
+            for i, _label in enumerate(vcr_labels):
+                vcr_targets[i] = _label
+            vcr_loss = F.cross_entropy(vcr_logits, vcr_targets.view(-1))
+
+        if not return_dict:
+            output = (vcr_logits,)
+            return ((vcr_loss,) + output) if vcr_loss is not None else output
+        return VLEForVCRQ2AOutput(
+            loss = vcr_loss,
+            logits = vcr_logits
+        )
+
+
+class VLEForVCRQA2R(VLEPreTrainedModel):
+    def __init__(
+        self,
+        config: Optional[VLEConfig] = None,
+        vision_model: Optional[PreTrainedModel] = None,
+        text_model: Optional[PreTrainedModel] = None,
+    ):
+        super().__init__(config)
+        self.vle = VLEModel(config, vision_model, text_model)
+
+        hidden_size = config.hidden_size
+        self.vcr_qa2r_logit = nn.Sequential(
+                                    nn.Linear(hidden_size * 2, hidden_size * 2),
+                                    nn.LayerNorm(hidden_size * 2),
+                                    nn.GELU(),
+                                    nn.Linear(hidden_size * 2, 1),
+        )
+        self.vcr_qa2r_logit.apply(self._init_weights)
+    
+    def forward(self,
+                input_ids: Optional[torch.LongTensor],
+                pixel_values: Optional[torch.FloatTensor],
+                attention_mask: Optional[torch.Tensor] = None,
+                position_ids: Optional[torch.LongTensor] = None,
+                token_type_ids: Optional[torch.LongTensor] = None,
+                patch_ids = None,
+                vcr_labels = None,
+                extend_token_type_ids = None,
+                return_loss: Optional[bool] = None,
+                return_dict: Optional[bool] = None,
+    ) -> Union[Tuple[torch.Tensor], VLEForVQAOutput]:
+
+        return_dict = return_dict if return_dict is not None else self.config.return_dict
+
+        infers = []
+        for i in range(4):
+            vle_output = self.vle(
+                input_ids = input_ids[i],
+                pixel_values = pixel_values,
+                attention_mask = attention_mask[i],
+                position_ids = position_ids,
+                token_type_ids = token_type_ids[i],
+                patch_ids = patch_ids[i],
+                extend_token_type_ids = extend_token_type_ids[i])
+            pooler_output = vle_output[0]
+            logits = self.vcr_qa2r_logit(pooler_output)
+            infers.append(logits)
+
+        vcr_logits = torch.cat(infers, dim=-1)
+        vcr_loss = None
+        if return_loss and vcr_labels is not None:
+            vcr_targets = torch.zeros(len(vcr_logits), dtype=torch.long).to(self.device)
+            for i, _label in enumerate(vcr_labels):
+                vcr_targets[i] = _label
+            vcr_loss = F.cross_entropy(vcr_logits, vcr_targets.view(-1))
+
+        if not return_dict:
+            output = (vcr_logits,)
+            return ((vcr_loss,) + output) if vcr_loss is not None else output
+        return VLEForVCRQA2ROutput(
+            loss = vcr_loss,
+            logits = vcr_logits
+        )

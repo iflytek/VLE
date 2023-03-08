@@ -1,0 +1,51 @@
+{
+    
+    "seed": 0,
+    "model_dir": "vle-base-ft-vqa",
+    "data_root": "./data/vqav2/vqav2_arrow",
+    "num_workers": 4,
+    "batch_size": 16,
+    "per_gpu_batchsize": 4,
+    "image_size": 384,
+    "max_text_len": 50,
+    "draw_false_image": 0,
+    "draw_false_text": 0,
+    "image_only": false,
+    "log_dir": "logs",
+    "num_gpus": 1,
+    "num_nodes": 1,
+    "max_epoch": 10,
+    "max_steps": -1,
+    "precision": 16,
+    "resume_from": "",
+    "fast_dev_run": false,
+    "val_check_interval": 1.0,
+    "save_top_k": 1,
+    "save_weights_only": true,
+    "test_only": false,
+    "learning_rate":1e-5,
+    "weight_decay": 0.01,
+    "lr_mult_head": 50,
+    "lr_mult_cross_modal": 5,
+    "end_lr": 0,
+    "decay_power": 1,
+    "optim_type": "adamw",
+    "warmup_steps": 0.1,
+    "use_deepspeed": true,
+    "deepspeed_config":{
+        "fp16": {
+          "enabled": true,
+          "initial_scale_power": 12,
+          "min_loss_scale": 2e-10,
+          "loss_scale_window": 128
+        },
+        "zero_optimization": {
+          "stage": 2,
+          "reduce_bucket_size": 5e7,
+          "allgather_bucket_size": 1.25e9,
+          "overlap_comm": true,
+          "contiguous_gradients": true
+        },
+        "zero_allow_untested_optimizer": true
+    }      
+}
