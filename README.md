@@ -1,4 +1,4 @@
-# VLE: Vision-Language Encoder (视觉-语言多模态预训练模型)
+# VLE: Vision-Language Encoder (VLE：视觉-语言多模态预训练模型)
 
 Multimodal pre-trained models are trained on massive multimodal data, and they can utilize information from different modalities and perform various cross-modal tasks. 
 
@@ -49,7 +49,7 @@ VLE models are pre-trained on 14M public English image-caption pairs for 25k ste
 The following figure illustrates the VLE structure and the pre-training objectives (for simplicity, we omit the PBC objective in the figure).
 
 
-<div align=center><img src="pics/model.png" alt="VLE structure and pre-training tasks" width="600" /></div>
+<div align=center><img src="pics/model.png" alt="VLE structure and pre-training tasks" width="500" /></div>
 
 ### Adaptation for downstream tasks
 
