@@ -2,7 +2,7 @@
 
 Multimodal pre-trained models are trained on massive multimodal data, and they can utilize information from different modalities and perform various cross-modal tasks. 
 
-In this repository, we introduce VLE (Visual-Language Encoder), an image-text multimodal understanding model built on the pre-trained text and image encoders. It can be used for multimodal discriminative tasks such as visual question answering and image-text retrieval. Especially on the visual commonsense reasoning (VCR) task, which requires high-level language understanding and reasoning skills, VLE achieves the best performance among the public methods.
+In this repository, we introduce **VLE** (**V**isual-**L**anguage **E**ncoder), an image-text multimodal understanding model built on the pre-trained text and image encoders. It can be used for multimodal discriminative tasks such as visual question answering and image-text retrieval. Especially on the visual commonsense reasoning (VCR) task, which requires high-level language understanding and reasoning skills, VLE achieves the best performance among the public methods.
 
 Recently, LLMs (Large Language Models) have achieved great success and have been used for a wide range of text tasks, including translation, question answering, text summarization, etc. While LLMs are unimodal, their abilities can be leveraged for multimodal understanding tasks. We propose a VQA+LLM pipeline that integrates multimodal models with LLMs for the visual question answering task. It helps the VQA model generate more accurate and fluent answers. 
 
@@ -44,12 +44,11 @@ VLE is pre-trained with image-caption pairs. There are four objectives applied d
 * **MPC** (Masked Patch-box Classification): Given an image-caption pair with some patches masked, the model needs to predict the classes of the objects in the masked patches.
 * **PBC** (Patch-box classification): Given an image-caption pair, the models need to identify which patches are related to the caption.
 
-VLE models have been pre-trained on 14M public English image-caption pairs for 25k steps with a batch size of 2048.
+VLE models are pre-trained on 14M public English image-caption pairs for 25k steps with a batch size of 2048.
 
 The following figure illustrates the VLE structure and the pre-training objectives (for simplicity, we omit the PBC objective in the figure).
 
-<img src="pics/model.png" alt="image-20230223173505086" style="zoom:30%;" />
-<center>VLE structure and pre-training tasks</center>
+<img src="pics/model.png" alt="VLE structure and pre-training tasks" width="400" />
 
 ### Adaptation for downstream tasks
 
@@ -123,9 +122,7 @@ LLMs have achieved great success on a wide range of text tasks. However, the abi
 
 The workflows are shown in the figure below. 
 
-<img src="pics/VQALLM.png" alt="VQALLM" style="zoom:40%;" />
-
-<center>Workflows of VQA and VQA+LLM</center>
+<img src="pics/VQALLM.png" alt="Workflows" style="zoom:40%;" />
 
 (a) VQA: This is the standard way to perform the VQA task with a discriminative model. The question and the image are fed into the multimodal model, and the model is trained to predict the correct answer labels.
 
@@ -239,8 +236,7 @@ print(pbc_text)
 pbc_pred['image'].save('pics/pink_tongues.png')
 ```
 
-<img src="pics/pink_tongues.png" alt="pink_tongues" style="zoom:50%;" />
-<center>PBC prediction</center>
+<img src="pics/pink_tongues.png" alt="PBC prediction" width="375" />
 
 #### Visual Commonsense Reasoning (VCR)
 
