@@ -90,12 +90,12 @@ You can either download the weights and configurations manually or initialize a 
 
 ### Fine-tuned Checkpoints
 
-| Model             | Text Encoder     | Image Encoder          | MODEL_NAME            | Link                                                |
-| ----------------- | ---------------- | ---------------------- | --------------------- | --------------------------------------------------- |
-| VLE-base-for-VQA  | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vqa  | [link](https://huggingface.co/hfl/vle-base-for-vqa) |
-| VLE-large-for-VQA | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vqa |                                                     |
-| VLE-base-for-VCR  | Deberta-v3-base  | CLIP-ViT-base-patch16  |                       |                                                     |
-| VLE-large-for-VCR | Deberta-v3-large | CLIP-ViT-large-patch14 |                       |                                                     |
+| Model             | Text Encoder     | Image Encoder          | MODEL_NAME            | Link                                                 |
+| ----------------- | ---------------- | ---------------------- | --------------------- | ---------------------------------------------------- |
+| VLE-base-for-VQA  | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vqa  | [link](https://huggingface.co/hfl/vle-base-for-vqa)  |
+| VLE-large-for-VQA | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vqa | [link](https://huggingface.co/hfl/vle-large-for-vqa) |
+| VLE-base-for-VCR  | Deberta-v3-base  | CLIP-ViT-base-patch16  |                       |                                                      |
+| VLE-large-for-VCR | Deberta-v3-large | CLIP-ViT-large-patch14 |                       |                                                      |
 
 ## Comparison
 
@@ -130,7 +130,7 @@ From the above results, we see that:
 
 ### Generating Accurate and Fluent VQA Answers
 
-LLMs have achieved great success on a wide range of text tasks. However, the abilities of LLMs can also be leveraged for multimodal understanding tasks. Specifically, we present a VQA+LLM pipeline that integrates multimodal models with LLMs for the visual question answering task, which helps the VQA model to generate more accurate and fluent answers. 
+LLMs have achieved great success on a wide range of text tasks, while the abilities of LLMs can also be leveraged for multimodal understanding tasks. Specifically, we present a VQA+LLM pipeline that integrates multimodal models with LLMs for the visual question answering task, which helps the VQA model to generate more accurate and fluent answers. 
 
 The workflows are shown in the figure below. 
 
@@ -142,15 +142,15 @@ The workflows are shown in the figure below.
 
 We find that VQA+LLM can not only make more accurate predictions, but also generate more fluent and readable predictions. We list some examples:
 
-#### VLE+LLM improves the accuracy
+**VLE+LLM improves the accuracy**
 
+<div align=center><img src="pics/truck.png" alt="men and truck" width="500" /></div>
 
+**VLE+LLM makes the answer more reasonable**
 
-#### VLE+LLM improves the fluency
+<div align=center><img src="pics/hatch.png" alt="hatch" width="500" /></div>
 
-
-
-Demo URL: https://huggingface.co/spaces/hfl/VQA_VLE_LLM
+The demo is available at : https://huggingface.co/spaces/hfl/VQA_VLE_LLM
 
 
 ## Usage
