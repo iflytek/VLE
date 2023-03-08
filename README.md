@@ -31,13 +31,13 @@ More resources released by HFL: https://github.com/ymcui/HFL-Anthology
 
 ## Table of Contents
 
-| Section                       | Description                                                 |
-| ----------------------------- | ----------------------------------------------------------- |
-| [Introduction](#introduction) | Introduction to VLE                                         |
-| [Downloads](#downloads)       | Download links for VLE                                      |
-| [Comparison](#comparison)     | Comparison of VLE with other models                         |
-| [VLE with LLM](#vle_with_llm) | Generating accurate and fluent VQA answers with VLE and LLM |
-| [Usage](#usage)               | How to load VLE for different tasks                         |
+| Section                       | Description                         |
+| ----------------------------- | ----------------------------------- |
+| [Introduction](#introduction) | Introduction to VLE                 |
+| [Downloads](#downloads)       | Download links for VLE              |
+| [Comparison](#comparison)     | Comparison of VLE with other models |
+| [VQA with LLM](#vqawithllm)   | Visual question answering with LLM  |
+| [Usage](#usage)               | How to load VLE for different tasks |
 
 ## Introduction
 
@@ -102,16 +102,16 @@ The model weights are in PyTorch format and can be downloaded through the 🤗 t
 
 In the following table, we compare the performance of VLE with METER and other multimodal models. The VQA results are on the test-dev set, and the VCR results are on the dev set.
 
-| Model               | VQA | VCR (QA2R) | VCR (Q2A) | # Params | # pre-training data<sup>*</sup> |
+| Model               | VQA | VCR (QA2R) | VCR (Q2A) | #Params | #PT data<sup>*</sup> |
 | ------------------- | ---------------- | -------------- | ------------- | ------------ | ------- |
 | CoCa | 82.3 | - | - | 2.1 B | unknown |
-| BeiT-3 | 84.2 | - | - | 1.9 B | 21M Pairs + 14M(I) + 160G(T) |
-| OFA | 82.0 | - | - | 930M | 15M Pairs + 39M(I) + 140G(T) |
-| BLIP | 78.3 | - | - | 385M | 129M Pairs |
-| METER-CLIP-ViT-base | 77.7  (76.8<sup>†‡</sup>) | 79.8<sup>§</sup> | 77.6<sup>§</sup> | 345M         | 4M Pairs |
-| METER-CoSwin-Huge   | 80.3           | -              | -             | 878M         | 14M Pairs |
-| VLE-base            | 77.6<sup>‡</sup> | 83.7<sup>§</sup> | 79.9<sup>§</sup> | 378M         | 14M Pairs |
-| VLE-large           | 79.3<sup>‡</sup> | 87.5<sup>§</sup> | 84.3<sup>§</sup> | 930M | 14M Pairs |
+| BeiT-3 | 84.2 | - | - | 1.9 B | 21M(I-T) + 14M(I) + 160G(T) |
+| OFA | 82.0 | - | - | 930M | 15M(I-T) + 39M(I) + 140G(T) |
+| BLIP | 78.3 | - | - | 385M | 129M(I-T) |
+| METER-CLIP-ViT-base | 77.7  (76.8<sup>†‡</sup>) | 79.8<sup>§</sup> | 77.6<sup>§</sup> | 345M         | 4M(I-T) |
+| METER-CoSwin-Huge   | 80.3           | -              | -             | 878M         | 14M(I-T) |
+| VLE-base            | 77.6<sup>‡</sup> | 83.7<sup>§</sup> | 79.9<sup>§</sup> | 378M         | 14M(I-T) |
+| VLE-large           | 79.3<sup>‡</sup> | 87.5<sup>§</sup> | 84.3<sup>§</sup> | 930M | 14M(I-T) |
 
 <sup>†</sup> : Result from our reimplementation.
 
@@ -119,7 +119,7 @@ In the following table, we compare the performance of VLE with METER and other m
 
 <sup>§</sup> : Fine-tuning hyperparameters: lr=1e-5, batch_size=128, num_epochs=5
 
-<sup>*</sup> : Pairs: Image-caption pairs. I : Images. T: Text.
+<sup>*</sup> : Pre-training data. I-T: Image-caption pairs. I : Images. T: Text.
 
 From the above results, we see that:
 
@@ -127,7 +127,7 @@ From the above results, we see that:
 
 * **VLE shows higher reasoning ability**. Especially it significantly outperforms METER on Visual Commonsense Reasoning (VCR), which requires higher level language and reasoning skills than VQA. 
 
-## VLE with LLM
+## VQA with LLM
 
 ### Generating Accurate and Fluent VQA Answers
 
