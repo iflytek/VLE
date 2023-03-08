@@ -48,7 +48,7 @@ VLE models are pre-trained on 14M public English image-caption pairs for 25k ste
 
 The following figure illustrates the VLE structure and the pre-training objectives (for simplicity, we omit the PBC objective in the figure).
 
-<img src="pics/model.png" alt="VLE structure and pre-training tasks" width="400" />
+<img src="pics/model.png" alt="VLE structure and pre-training tasks" width="500" />
 
 ### Adaptation for downstream tasks
 
@@ -122,7 +122,7 @@ LLMs have achieved great success on a wide range of text tasks. However, the abi
 
 The workflows are shown in the figure below. 
 
-<img src="pics/VQALLM.png" alt="Workflows" style="zoom:40%;" />
+<img src="pics/VQALLM.png" alt="Workflows" width="600"  />
 
 (a) VQA: This is the standard way to perform the VQA task with a discriminative model. The question and the image are fed into the multimodal model, and the model is trained to predict the correct answer labels.
 
@@ -236,7 +236,7 @@ print(pbc_text)
 pbc_pred['image'].save('pics/pink_tongues.png')
 ```
 
-<img src="pics/pink_tongues.png" alt="PBC prediction" width="375" />
+<img src="pics/pink_tongues.png" alt="PBC prediction" width="350" />
 
 #### Visual Commonsense Reasoning (VCR)
 
