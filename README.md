@@ -90,12 +90,14 @@ You can either download the weights and configurations manually or initialize a 
 
 ### Fine-tuned Checkpoints
 
-| Model             | Text Encoder     | Image Encoder          | MODEL_NAME            | Link                                                 |
-| ----------------- | ---------------- | ---------------------- | --------------------- | ---------------------------------------------------- |
-| VLE-base-for-VQA  | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vqa  | [link](https://huggingface.co/hfl/vle-base-for-vqa)  |
-| VLE-large-for-VQA | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vqa | [link](https://huggingface.co/hfl/vle-large-for-vqa) |
-| VLE-base-for-VCR  | Deberta-v3-base  | CLIP-ViT-base-patch16  |                       |                                                      |
-| VLE-large-for-VCR | Deberta-v3-large | CLIP-ViT-large-patch14 |                       |                                                      |
+| Model                  | Text Encoder     | Image Encoder          | MODEL_NAME                 | Link                                                      |
+| ---------------------- | ---------------- | ---------------------- | -------------------------- | --------------------------------------------------------- |
+| VLE-base-for-VQA       | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vqa       | [link](https://huggingface.co/hfl/vle-base-for-vqa)       |
+| VLE-large-for-VQA      | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vqa      | [link](https://huggingface.co/hfl/vle-large-for-vqa)      |
+| VLE-base-for-VCR-q2a   | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vcr-q2a   | [link](https://huggingface.co/hfl/vle-base-for-vcr-q2a)   |
+| VLE-large-for-VCR-q2a  | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vcr-q2a  | [link](https://huggingface.co/hfl/vle-large-for-vcr-q2a)  |
+| VLE-base-for-VCR-qa2r  | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vcr-qa2r  | [link](https://huggingface.co/hfl/vle-base-for-vcr-qa2r)  |
+| VLE-large-for-VCR-qa2r | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vcr-qa2r | [link](https://huggingface.co/hfl/vle-large-for-vcr-qa2r) |
 
 ## Comparison
 
