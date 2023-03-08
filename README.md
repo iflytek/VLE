@@ -45,7 +45,7 @@ More resources released by HFL: https://github.com/ymcui/HFL-Anthology
 
 The structure of VLE is similar to [METER](https://arxiv.org/abs/2111.02387), which consists of two unimodal encoders for text and image separately, followed by a crossmodal fusion module. However, there are several structural differences between VLE and METER:
 
-* VLE uses Deberta-v3 as the text encoder, which is stronger than RoBERTa-base used in METER.
+* VLE uses DeBERTa-v3 as the text encoder, which is stronger than RoBERTa-base used in METER.
 * In the large version of VLE (VLE-large), the hidden size of the crossmodal co-attention fusion module is scaled up to 1024 to increase capacities.
 * During fine-tuning, VLE introduces additional token_type_embeddings.
 
@@ -85,8 +85,8 @@ You can either download the weights and configurations manually or initialize a 
 
 | Model     | Text Encoder     | Image Encoder          | # Params<sup>*</sup> | MODEL_NAME    | Link                                         |
 | --------- | ---------------- | ---------------------- | -------------------- | ------------- | -------------------------------------------- |
-| VLE-base  | Deberta-v3-base  | CLIP-ViT-base-patch16  | 378M                 | hfl/vle-base  | [link](https://huggingface.co/hfl/vle-base)  |
-| VLE-large | Deberta-v3-large | CLIP-ViT-large-patch14 | 930M                 | hfl/vle-large | [link](https://huggingface.co/hfl/vle-large) |
+| VLE-base  | DeBERTa-v3-base  | CLIP-ViT-base-patch16  | 378M                 | hfl/vle-base  | [link](https://huggingface.co/hfl/vle-base)  |
+| VLE-large | DeBERTa-v3-large | CLIP-ViT-large-patch14 | 930M                 | hfl/vle-large | [link](https://huggingface.co/hfl/vle-large) |
 
 <sup>*</sup> : We exclude task heads when counting the number of parameters.
 
@@ -94,12 +94,12 @@ You can either download the weights and configurations manually or initialize a 
 
 | Model                  | Text Encoder     | Image Encoder          | MODEL_NAME                 | Link                                                      |
 | ---------------------- | ---------------- | ---------------------- | -------------------------- | --------------------------------------------------------- |
-| VLE-base-for-VQA       | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vqa       | [link](https://huggingface.co/hfl/vle-base-for-vqa)       |
-| VLE-large-for-VQA      | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vqa      | [link](https://huggingface.co/hfl/vle-large-for-vqa)      |
-| VLE-base-for-VCR-q2a   | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vcr-q2a   | [link](https://huggingface.co/hfl/vle-base-for-vcr-q2a)   |
-| VLE-large-for-VCR-q2a  | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vcr-q2a  | [link](https://huggingface.co/hfl/vle-large-for-vcr-q2a)  |
-| VLE-base-for-VCR-qa2r  | Deberta-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vcr-qa2r  | [link](https://huggingface.co/hfl/vle-base-for-vcr-qa2r)  |
-| VLE-large-for-VCR-qa2r | Deberta-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vcr-qa2r | [link](https://huggingface.co/hfl/vle-large-for-vcr-qa2r) |
+| VLE-base-for-VQA       | DeBERTa-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vqa       | [link](https://huggingface.co/hfl/vle-base-for-vqa)       |
+| VLE-large-for-VQA      | DeBERTa-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vqa      | [link](https://huggingface.co/hfl/vle-large-for-vqa)      |
+| VLE-base-for-VCR-q2a   | DeBERTa-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vcr-q2a   | [link](https://huggingface.co/hfl/vle-base-for-vcr-q2a)   |
+| VLE-large-for-VCR-q2a  | DeBERTa-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vcr-q2a  | [link](https://huggingface.co/hfl/vle-large-for-vcr-q2a)  |
+| VLE-base-for-VCR-qa2r  | DeBERTa-v3-base  | CLIP-ViT-base-patch16  | hfl/vle-base-for-vcr-qa2r  | [link](https://huggingface.co/hfl/vle-base-for-vcr-qa2r)  |
+| VLE-large-for-VCR-qa2r | DeBERTa-v3-large | CLIP-ViT-large-patch14 | hfl/vle-large-for-vcr-qa2r | [link](https://huggingface.co/hfl/vle-large-for-vcr-qa2r) |
 
 ## Comparison
 
