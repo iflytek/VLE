@@ -61,7 +61,6 @@ VLE models are pre-trained on 14M public English image-caption pairs for 25k ste
 
 The following figure illustrates the VLE structure and the pre-training objectives (for simplicity, we omit the PBC objective in the figure).
 
-
 <div align=center><img src="pics/model.png" alt="VLE structure and pre-training tasks" width="500" /></div>
 
 ### Adaptation for downstream tasks
@@ -77,9 +76,7 @@ The following figure illustrates the VLE structure and the pre-training objectiv
 
 ## Downloads
 
-The model weights are in PyTorch format and can be downloaded through the 🤗 transformers model hub.
-
-You can either download the weights and configurations manually or initialize a VLE model with `from_pretrained(model_name)`  method in your code.
+The model weights are in PyTorch format and can be downloaded through the 🤗 transformers model hub. You can either download the weights and configurations manually or initialize a VLE model with `from_pretrained(model_name)`  method in your code. See [Usage](#usage) for details.
 
 ### Pre-trained Checkpoints
 
@@ -126,9 +123,9 @@ In the following table, we compare the performance of VLE with METER and other m
 
 From the above results, we see that:
 
-**VLE is pre-training efficient**. Compared to models with similar model sizes, VLE achieves comparable or even better performance on VQA with much less pre-training data. 
+* **VLE is pre-training efficient**. Compared to models with similar model sizes, VLE achieves comparable or even better performance on VQA with much less pre-training data. 
 
-**VLE shows higher reasoning ability**. Especially it significantly outperforms METER on Visual Commonsense Reasoning (VCR), which requires higher level language and reasoning skills than VQA. 
+* **VLE shows higher reasoning ability**. Especially it significantly outperforms METER on Visual Commonsense Reasoning (VCR), which requires higher level language and reasoning skills than VQA. 
 
 ## VLE with LLM
 
@@ -138,7 +135,7 @@ LLMs have achieved great success on a wide range of text tasks, while the abilit
 
 The workflows are shown in the figure below. 
 
-<div align=center><img src="pics/VQALLM.png" alt="Workflows" width="800" /></div>
+<div align=center><img src="pics/VQALLM_workflow.png" alt="Workflows" width="800" /></div>
 
 (a) VQA: This is the standard way to perform the VQA task with a discriminative model. The question and the image are fed into the multimodal model, and the model is trained to predict the correct answer labels.
 
@@ -165,11 +162,11 @@ The demo is available at : https://huggingface.co/spaces/hfl/VQA_VLE_LLM
 * Transformers >= 4.25
 * PyTorch Lightning (only required for running fine-tuning scripts)
 
-The model classes are defined in the *.py files in [models/VLE](models/VLE). To import VLE into your code, just copy [models](models) directory into your project.
+The model classes and utilities are defined in the *.py files in [models/VLE](models/VLE). To import VLE into your code, just copy [models](models) directory into your project.
 
 To run the following demo code, git clone the repository and cd into it, ensuring you are in the repository's root directory.
 
-### Initializing a VLEModel
+### Load the VLEModel
 
 ```python
 from models.VLE import VLEModel, VLEProcessor
