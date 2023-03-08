@@ -1,3 +1,14 @@
+<p align="center">
+    <br>
+    <img src="./pics/banner.png" width="400"/>
+    <br>
+</p>
+<p align="center">
+    <a href="https://github.com/iflytek/VLE/blob/main/LICENSE">
+        <img alt="GitHub" src="https://img.shields.io/github/license/iflytek/VLE.svg?color=blue&style=flat-square">
+    </a>
+</p>
+
 # VLE: Vision-Language Encoder (VLE：视觉-语言多模态预训练模型)
 
 Multimodal pre-trained models are trained on massive multimodal data, and they can utilize information from different modalities and perform various cross-modal tasks. 
