@@ -238,9 +238,6 @@ pbc_pred['image'].save('pics/pink_tongues.png')
 ```
 
 
-<div align=center><img src="pics/pink_tongues.png" alt="PBC prediction" width="350" /></div>
-
-
 #### Visual Commonsense Reasoning (VCR)
 
 Please follow the instructions in [examples/VCR/README.md](examples/VCR/README.md)
