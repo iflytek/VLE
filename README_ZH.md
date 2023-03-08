@@ -1,4 +1,4 @@
-[**中文**](README_ZH.md) | [**English**](README.md)
+[**中文**](README_ZH.md) | [**English**](https://github.com/iflytek/VLE)
 
 <p align="center">
     <br>
@@ -106,8 +106,8 @@ VLE在14M的英文图文对数据上进行了25000步的预训练，batch大小�
 | BeiT-3 | 84.2 | - | - | 1.9 B | 21M Pairs + 14M(I) + 160G(T) |
 | OFA | 82.0 | - | - | 930M | 15M Pairs + 39M(I) + 140G(T) |
 | BLIP | 78.3 | - | - | 385M | 129M Pairs |
-| METER-CLIP-ViT-base | 77.7  (76.8<sup>†‡</sup>) | 79.8<sup>§</sup> | 77.6<sup>§</sup> | 345M         | 4M Pairs |
-| METER-CoSwin-Huge   | 80.3           | -              | -             | 878M         | 14M Pairs |
+| METER-base | 77.7  (76.8<sup>†‡</sup>) | 79.8<sup>§</sup> | 77.6<sup>§</sup> | 345M         | 4M Pairs |
+| METER-Huge   | 80.3           | -              | -             | 878M         | 14M Pairs |
 | VLE-base            | 77.6<sup>‡</sup> | 83.7<sup>§</sup> | 79.9<sup>§</sup> | 378M         | 14M Pairs |
 | VLE-large           | 79.3<sup>‡</sup> | 87.5<sup>§</sup> | 84.3<sup>§</sup> | 930M | 14M Pairs |
 
