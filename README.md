@@ -36,7 +36,7 @@ More resources released by HFL: https://github.com/iflytek/HFL-Anthology
 | [Introduction](#introduction) | Introduction to VLE                 |
 | [Downloads](#downloads)       | Download links for VLE              |
 | [Comparison](#comparison)     | Comparison of VLE with other models |
-| [VQA with LLM](#vqawithllm)   | Visual question answering with LLM  |
+| [VQA with LLM](#vqa-with-llm) | Visual question answering with LLM  |
 | [Usage](#usage)               | How to load VLE for different tasks |
 
 ## Introduction
