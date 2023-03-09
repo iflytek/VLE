@@ -142,7 +142,7 @@ VQA+LLM生成的答案更准确，也有更高的可读性。下面是一些例�
 
 <div align=center><img src="pics/fishing.png" alt="hatch" width="700" /></div>
 
-Demo地址：https://huggingface.co/spaces/hfl/VQA_VLE_LLM
+Demo地址（仅供学术研究）：https://huggingface.co/spaces/hfl/VQA_VLE_LLM
 
 
 
@@ -155,9 +155,9 @@ Demo地址：https://huggingface.co/spaces/hfl/VQA_VLE_LLM
 * Transformers >= 4.25
 * PyTorch Lightning (仅用于运行精调脚本)
 
-模型相关代码位于[models/VLE](models/VLE)目录下的*py文件中。因此，要使用VLE模型，仅需把[models](models)目录复制到你的项目代码目录即可。
+模型相关代码位于[models/VLE](models/VLE)目录下的`*py`文件中。因此，要使用VLE模型，仅需把[models](models)目录复制到你的项目代码目录即可。
 
-要运行以下演示代码，请clone本仓库至本地，并进入仓库的根目录。
+要运行以下演示代码，请使用`git clone`命令下载本仓库至本地，并进入仓库的根目录。
 
 ### 加载VLEModel
 

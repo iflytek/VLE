@@ -11,7 +11,7 @@
     </a>
 </p>
 
-# VLE: Vision-Language Encoder (VLE：视觉-语言多模态预训练模型)
+# VLE: Vision-Language Encoder
 
 Multimodal pre-trained models are trained on massive multimodal data, and they can utilize information from different modalities and perform various cross-modal tasks. 
 
@@ -19,15 +19,15 @@ In this repository, we introduce **VLE** (**V**ision-**L**anguage **E**ncoder), 
 
 Recently, LLMs (Large Language Models) have achieved great success and have been used for a wide range of text tasks, including translation, question answering, text summarization, etc. While LLMs are unimodal, their abilities can be leveraged for multimodal understanding tasks. We propose a VQA+LLM pipeline that integrates multimodal models with LLMs for the visual question answering task. It helps the VQA model generate more accurate and fluent answers. 
 
-We open-source VLE-related resources for promoting academic research.
+We open-source VLE-related resources for promoting academic research and better facilitating our community.
 
-Online VLE demo on Visual Question Answering: [https://huggingface.co/spaces/hfl/VQA_VLE_LLM](https://huggingface.co/spaces/hfl/VQA_VLE_LLM)
+VLE-based VQA demo: [https://huggingface.co/spaces/hfl/VQA_VLE_LLM](https://huggingface.co/spaces/hfl/VQA_VLE_LLM)
 
 ----
 
 [Chinese LERT](https://github.com/ymcui/LERT) | [Chinese and English PERT](https://github.com/ymcui/PERT) | [Chinese MacBERT](https://github.com/ymcui/MacBERT) | [ChineseMiniRBT](https://github.com/iflytek/MiniRBT) | [Chinese ELECTRA](https://github.com/ymcui/Chinese-ELECTRA) | [Chinese XLNet](https://github.com/ymcui/Chinese-XLNet) | [Chinese BERT](https://github.com/ymcui/Chinese-BERT-wwm) | [ Knowledge distillation tool TextBrewer](https://github.com/airaria/TextBrewer) | [Model pruning tool TextPruner](https://github.com/airaria/TextPruner)
 
-More resources released by HFL: https://github.com/ymcui/HFL-Anthology
+More resources released by HFL: https://github.com/iflytek/HFL-Anthology
 
 ## Table of Contents
 
@@ -55,7 +55,7 @@ VLE is pre-trained with image-caption pairs. There are four objectives applied d
 * **MLM** (Masked Language Modeling): Given an image-caption pair, we randomly mask some input text tokens, and the model is trained to reconstruct the original tokens.
 * **ITM** (Image-Text Matching): Given a batch of matched or mismatched image-caption pairs, the model needs to identify which images and captions correspond to each other.
 * **MPC** (Masked Patch-box Classification): Given an image-caption pair with some patches masked, the model needs to predict the classes of the objects in the masked patches.
-* **PBC** (Patch-box classification): Given an image-caption pair, the models need to identify which patches are related to the caption.
+* **PBC** (Patch-box Classification): Given an image-caption pair, the models need to identify which patches are related to the caption.
 
 VLE models are pre-trained on 14M public English image-caption pairs for 25k steps with a batch size of 2048.
 
@@ -121,7 +121,7 @@ In the following table, we compare the performance of VLE with METER and other m
 
 <sup>*</sup> : Pre-training data. I-T: Image-caption pairs. I: Images. T: Text.
 
-From the above results, we see that:
+From the above results, we can see that:
 
 * **VLE is pre-training efficient**. Compared to models with similar model sizes, VLE achieves comparable or even better performance on VQA with much less pre-training data. 
 
@@ -160,9 +160,9 @@ The demo is available at : https://huggingface.co/spaces/hfl/VQA_VLE_LLM
 * Transformers >= 4.25
 * PyTorch Lightning (only required for running fine-tuning scripts)
 
-The model classes and utilities are defined in the *.py files in [models/VLE](models/VLE). To import VLE into your code, just copy [models](models) directory into your project.
+The model classes and utilities are defined in the `*.py` files in [models/VLE](models/VLE). To import VLE into your code, just copy [models](models) directory into your project.
 
-To run the following demo code, git clone the repository and cd into it, ensuring you are in the repository's root directory.
+To run the following demo code, `git clone` the repository and `cd` into it, ensuring you are in the repository's root directory.
 
 ### Load the VLEModel
 
