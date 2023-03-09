@@ -8,8 +8,12 @@
 <p align="center">
     <a href="https://github.com/iflytek/VLE/blob/main/LICENSE">
         <img alt="GitHub" src="https://img.shields.io/github/license/iflytek/VLE.svg?color=blue&style=flat-square">
+      	<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/iflytek/vle">
+      	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/iflytek/vle">
+      	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/iflytek/vle">
     </a>
 </p>
+
 
 # VLE：视觉-语言多模态预训练模型
 
