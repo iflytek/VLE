@@ -136,11 +136,11 @@ VLE在14M的英文图文对数据上进行了25000步的预训练，batch大小�
 
 VQA+LLM生成的答案更准确，也有更高的可读性。下面是一些例子：
 
-<div align=center><img src="pics/truck.png" alt="men and truck" width="500" /></div>
+<div align=center><img src="pics/truck.png" alt="men and truck" width="600" /></div>
 
 
 
-<div align=center><img src="pics/hatch.png" alt="hatch" width="500" /></div>
+<div align=center><img src="pics/fishing.png" alt="hatch" width="600" /></div>
 
 Demo地址：https://huggingface.co/spaces/hfl/VQA_VLE_LLM
 

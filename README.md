@@ -143,13 +143,11 @@ The workflows are shown in the figure below.
 
 We find that VQA+LLM can not only make more accurate predictions, but also generate more fluent and readable predictions. We list some examples:
 
-**VLE+LLM improves the accuracy**
+<div align=center><img src="pics/truck.png" alt="men and truck" width="600" /></div>
 
-<div align=center><img src="pics/truck.png" alt="men and truck" width="500" /></div>
 
-**VLE+LLM makes the answer more reasonable**
 
-<div align=center><img src="pics/hatch.png" alt="hatch" width="500" /></div>
+<div align=center><img src="pics/fishing.png" alt="hatch" width="600" /></div>
 
 The demo is available at : https://huggingface.co/spaces/hfl/VQA_VLE_LLM
 
