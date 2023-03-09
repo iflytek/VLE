@@ -106,12 +106,12 @@ In the following table, we compare the performance of VLE with METER and other m
 | ------------------- | ---------------- | -------------- | ------------- | ------------ | ------- |
 | CoCa | 82.3 | - | - | 2.1 B | unknown |
 | BeiT-3 | 84.2 | - | - | 1.9 B | 21M(I-T) + 14M(I) + 160G(T) |
-| OFA | 82.0 | - | - | 930M | 15M(I-T) + 39M(I) + 140G(T) |
-| BLIP | 78.3 | - | - | 385M | 129M(I-T) |
-| METER-base | 77.7  (76.8<sup>†‡</sup>) | 79.8<sup>§</sup> | 77.6<sup>§</sup> | 345M         | 4M(I-T) |
-| METER-Huge   | 80.3           | -              | -             | 878M         | 14M(I-T) |
-| VLE-base            | 77.6<sup>‡</sup> | 83.7<sup>§</sup> | 79.9<sup>§</sup> | 378M         | 14M(I-T) |
-| VLE-large           | 79.3<sup>‡</sup> | 87.5<sup>§</sup> | 84.3<sup>§</sup> | 930M | 14M(I-T) |
+| OFA | 82.0 | - | - | 930M | 20M(I-T) + 39M(I) + 140G(T) |
+| BLIP | 78.3 | - | - | 385M | ~130M(I-T) |
+| METER-base | 77.7  (76.8<sup>†‡</sup>) | 79.8<sup>§</sup> | 77.6<sup>§</sup> | 345M         | 9M(I-T) |
+| METER-Huge   | 80.3           | -              | -             | 878M         | 20M(I-T) |
+| VLE-base            | 77.6<sup>‡</sup> | 83.7<sup>§</sup> | 79.9<sup>§</sup> | 378M         | 15M(I-T) |
+| VLE-large           | 79.3<sup>‡</sup> | 87.5<sup>§</sup> | 84.3<sup>§</sup> | 930M | 15M(I-T) |
 
 <sup>†</sup> : Result from our reimplementation.
 
@@ -119,7 +119,7 @@ In the following table, we compare the performance of VLE with METER and other m
 
 <sup>§</sup> : Fine-tuning hyperparameters: lr=1e-5, batch_size=128, num_epochs=5
 
-<sup>*</sup> : Pre-training data. I-T: Image-caption pairs. I : Images. T: Text.
+<sup>*</sup> : Pre-training data. I-T: Image-caption pairs. I: Images. T: Text.
 
 From the above results, we see that:
 
