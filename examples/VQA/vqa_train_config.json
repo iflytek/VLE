@@ -1,7 +1,7 @@
 {
     
     "seed": 0,
-    "model_dir": "vle-base-ft-vqa",
+    "model_dir": "hfl/vle-base-ft-vqa",
     "data_root": "./data/vqav2/vqav2_arrow",
     "num_workers": 4,
     "batch_size": 16,

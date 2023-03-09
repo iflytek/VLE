@@ -19,7 +19,7 @@ The sample's image is placed in `vcr_sample_images/` as follows, and the annotat
 ```python
 from models.VLE import VLEForVCRQ2A, VLEProcessor, VLEForVCRQ2APipeline
 
-model_name = 'vle-large-for-vcr-q2a'
+model_name = 'hfl/vle-large-for-vcr-q2a'
 model = VLEForVCRQ2A.from_pretrained(model_name)
 vle_processor = VLEProcessor.from_pretrained(model_name)
 vcr_q2a_pipeline = VLEForVCRQ2APipeline(model=model, device='cpu', vle_processor=vle_processor)
@@ -42,7 +42,7 @@ print(f'predict: {pred[0] + 1}')
 ```python
 from models.VLE import VLEForVCRQA2R, VLEProcessor, VLEForVCRQA2RPipeline
 
-model_name = 'vle-large-for-vcr-qa2r'
+model_name = 'hfl/vle-large-for-vcr-qa2r'
 model = VLEForVCRQA2R.from_pretrained(model_name)
 vle_processor = VLEProcessor.from_pretrained(model_name)
 vcr_qa2r_pipeline = VLEForVCRQA2RPipeline(model=model, device='cpu', vle_processor=vle_processor)
