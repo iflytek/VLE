@@ -258,6 +258,11 @@ pbc_pred['image'].save('pics/pink_tongues.png')
 
 ![qrcode.png](pics/qrcode.jpg)
 
+## 免责声明
+本项目相关资源应仅用于学术研究。我们不对使用相关资源产生的任何损失负责。
+
+本目录相关内容不属于科大讯飞官方产品。
+
 ## 问题反馈
 如有问题，请在GitHub Issue中提交。
 

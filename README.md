@@ -264,8 +264,13 @@ Welcome to follow the official WeChat account of HFL to keep up with the latest 
 
 ![qrcode.png](pics/qrcode.jpg)
 
+## Disclaimer
+This repository's resources are solely intended for academic purposes, and we assume no responsibility for any unforeseen damages or losses that may result from their use.
+
+This is not an official product by iFLYTEK Co., Ltd.
 
 ## Issues
+
 If you have questions, please submit them in a GitHub Issue.
 
 - Before submitting an issue, please check whether the FAQ can solve the problem, and it is recommended to check whether the previous issue can solve your problem.
