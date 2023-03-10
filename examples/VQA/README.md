@@ -46,6 +46,7 @@ Please unzip and organize the dataset as follows:
     └── v2_mscoco_val2014_annotations.json
 
 We use `pyarrow` to serialize the datasets, the conversion script is `write_vqa.py`.
+Please replace the value of `id2label` in VLE Model's config with the generated mapping file `label2answer.json` (example: `config.json` of `hfl/vle-base-for-vqa`).
 
 ## Fine-tuning VLE on VQAv2
 
