@@ -16,6 +16,7 @@
 
 
 
+
 # VLE: Vision-Language Encoder
 
 Multimodal pre-trained models are trained on massive multimodal data, and they can utilize information from different modalities and perform various cross-modal tasks. 
@@ -26,7 +27,9 @@ Recently, LLMs (Large Language Models) have achieved great success and have been
 
 We open-source VLE-related resources for promoting academic research and better facilitating our community.
 
-VLE-based VQA demo: [https://huggingface.co/spaces/hfl/VQA_VLE_LLM](https://huggingface.co/spaces/hfl/VQA_VLE_LLM)
+**Try our VLE-based [VQA Demo](https://huggingface.co/spaces/hfl/VQA_VLE_LLM) at 🤗Space 👇👇👇**
+
+<div align=center><a href="https://huggingface.co/spaces/hfl/VQA_VLE_LLM"><img src="pics/demo-banner.png" alt="VLE-based VQA Demo" width="800" /></a></div>
 
 ----
 
