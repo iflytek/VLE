@@ -238,7 +238,7 @@ class VLEModel(VLEPreTrainedModel):
             raise ValueError("Either a configuration or an vision and a text model has to be provided")
 
         if config is None:
-            config = VLEConfig(vision_model.config, text_model.config)
+            config = VLEConfig(text_config=text_model.config, vision_config=vision_model.config)
         else:
             if not isinstance(config, self.config_class):
                 raise ValueError(f"config: {config} has to be of type {self.config_class}")
@@ -444,7 +444,7 @@ class VLEModel(VLEPreTrainedModel):
             text_model = AutoModel.from_pretrained(text_model_name_or_path, *model_args, **kwargs_text)
 
         # instantiate config with corresponding kwargs
-        config = VLEConfig(vision_model.config, text_model.config, **kwargs)
+        config = VLEConfig(text_config=text_model.config, vision_config=vision_model.config, **kwargs)
 
         # init model
         model = cls(config=config, vision_model=vision_model, text_model=text_model)
